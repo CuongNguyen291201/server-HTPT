@@ -1,10 +1,8 @@
 package com.example.h6.api;
 
+import com.example.h6.dto.ChuyenNganhDto;
 import com.example.h6.dto.DangKyDto;
-import com.example.h6.entity.GiangVien;
-import com.example.h6.entity.DangKy;
-import com.example.h6.entity.LopHocPhan;
-import com.example.h6.entity.SinhVien;
+import com.example.h6.entity.*;
 import com.example.h6.service.GiangVienService;
 import com.example.h6.service.DangKyService;
 import com.example.h6.service.LopHocPhanService;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/dang-ky")
 public class DangKyApi {
@@ -49,6 +47,13 @@ public class DangKyApi {
 
         DangKy _DangKy = DangKyService.save(DangKy);
         return ResponseEntity.ok(DangKy);
+    }
+
+    @PostMapping(value = "/get-by-id")
+    public ResponseEntity<DangKy> getById(@RequestBody DangKyDto dangKyDto) {
+        Optional<DangKy> dangKyOptional = DangKyService.getById(dangKyDto.getId());
+
+        return ResponseEntity.ok(dangKyOptional.orElse(null));
     }
 
     @PutMapping(value = "/update")

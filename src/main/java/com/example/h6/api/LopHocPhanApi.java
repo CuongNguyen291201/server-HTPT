@@ -1,10 +1,8 @@
 package com.example.h6.api;
 
+import com.example.h6.dto.LichHocDto;
 import com.example.h6.dto.LopHocPhanDto;
-import com.example.h6.entity.ChiNhanh;
-import com.example.h6.entity.ChuyenNganh;
-import com.example.h6.entity.LopHocPhan;
-import com.example.h6.entity.MonHoc;
+import com.example.h6.entity.*;
 import com.example.h6.service.ChiNhanhService;
 import com.example.h6.service.ChuyenNganhService;
 import com.example.h6.service.LopHocPhanService;
@@ -18,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
+
 @RequestMapping("/api/lop-hoc-phan")
 public class LopHocPhanApi {
 
@@ -35,6 +35,13 @@ public class LopHocPhanApi {
             LopHocPhanList = new ArrayList<>();
         }
         return ResponseEntity.ok(LopHocPhanList);
+    }
+
+    @PostMapping(value = "/get-by-id")
+    public ResponseEntity<LopHocPhan> getById(@RequestBody LopHocPhanDto lopHocPhanDto) {
+        Optional<LopHocPhan> lopHocPhanOptional = LopHocPhanService.getById(lopHocPhanDto.getId());
+
+        return ResponseEntity.ok(lopHocPhanOptional.orElse(null));
     }
 
     @PostMapping(value = "/create")

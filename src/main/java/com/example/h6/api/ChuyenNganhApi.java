@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/chuyen-nganh")
 public class ChuyenNganhApi {
@@ -24,6 +26,13 @@ public class ChuyenNganhApi {
             chuyenNganhList = new ArrayList<>();
         }
         return ResponseEntity.ok(chuyenNganhList);
+    }
+
+    @PostMapping(value = "/get-by-id")
+    public ResponseEntity<ChuyenNganh> getById(@RequestBody ChuyenNganhDto chuyenNganhDto) {
+        Optional<ChuyenNganh> chuyenNganhOptional = chuyenNganhService.getById(chuyenNganhDto.getId());
+
+        return ResponseEntity.ok(chuyenNganhOptional.orElse(null));
     }
 
     @PostMapping(value = "/create")
@@ -47,6 +56,9 @@ public class ChuyenNganhApi {
 
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Object> delete(@RequestBody ChuyenNganhDto chuyenNganhDto) {
+
+        System.out.println(chuyenNganhDto);
+
         return chuyenNganhService.delete(chuyenNganhDto.getId());
     }
 }

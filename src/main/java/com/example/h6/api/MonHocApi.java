@@ -1,8 +1,10 @@
 package com.example.h6.api;
 
+import com.example.h6.dto.LichHocDto;
 import com.example.h6.dto.MonHocDto;
 import com.example.h6.entity.ChiNhanh;
 import com.example.h6.entity.ChuyenNganh;
+import com.example.h6.entity.LichHoc;
 import com.example.h6.entity.MonHoc;
 import com.example.h6.service.ChuyenNganhService;
 import com.example.h6.service.MonHocService;
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
+
 @RequestMapping("/api/mon-hoc")
 public class MonHocApi {
 
@@ -32,9 +36,18 @@ public class MonHocApi {
         return ResponseEntity.ok(MonHocList);
     }
 
+    @PostMapping(value = "/get-by-id")
+    public ResponseEntity<MonHoc> getById(@RequestBody MonHocDto monHocDto) {
+        Optional<MonHoc> monHocOptional = MonHocService.getById(monHocDto.getId());
+
+        return ResponseEntity.ok(monHocOptional.orElse(null));
+    }
+
     @PostMapping(value = "/create")
     public ResponseEntity<MonHoc> create(@RequestBody MonHocDto MonHocDto) {
         Optional<ChuyenNganh> chuyenNganhOptional = chuyenNganhService.getById(MonHocDto.getIdChuyenNganh());
+
+        System.out.println(MonHocDto);
 
         MonHoc MonHoc = new MonHoc();
         MonHoc.setTen(MonHocDto.getTen());

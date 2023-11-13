@@ -1,5 +1,6 @@
 package com.example.h6.api;
 
+import com.example.h6.dto.DangKyDto;
 import com.example.h6.dto.LichHocDto;
 import com.example.h6.entity.*;
 import com.example.h6.service.ChiNhanhService;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
+
 @RequestMapping("/api/lich-hoc")
 public class LichHocApi {
     @Autowired
@@ -32,6 +35,13 @@ public class LichHocApi {
             LichHocList = new ArrayList<>();
         }
         return ResponseEntity.ok(LichHocList);
+    }
+
+    @PostMapping(value = "/get-by-id")
+    public ResponseEntity<LichHoc> getById(@RequestBody LichHocDto lichHocDto) {
+        Optional<LichHoc> lichHocOptional = LichHocService.getById(lichHocDto.getId());
+
+        return ResponseEntity.ok(lichHocOptional.orElse(null));
     }
 
     @PostMapping(value = "/create")
