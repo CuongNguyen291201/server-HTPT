@@ -34,7 +34,6 @@ public class LopHocPhanService {
     }
 
     public LopHocPhan update(LopHocPhan LopHocPhan) {
-        LopHocPhanRepository.deleteById(LopHocPhan.getId());
         return LopHocPhanRepository.save(LopHocPhan);
     }
 
