@@ -19,6 +19,9 @@ public class GiangVien {
 
     @Column(name = "password", length = 255)
     private String password;
+
+    @Column(name = "role", length = 10)
+    private int role;
     @Column(name = "ngaySinh", length = 255)
     private String ngaySinh;
 
@@ -43,7 +46,7 @@ public class GiangVien {
 
     }
 
-    public GiangVien(Long id, String ten, String ngaySinh, String gioiTinh, int luong, String email, String password) {
+    public GiangVien(Long id, String ten, String ngaySinh, String gioiTinh, int luong, String email, String password, int role) {
         this.id = id;
         this.ten = ten;
         this.ngaySinh = ngaySinh;
@@ -51,6 +54,7 @@ public class GiangVien {
         this.luong = luong;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -123,5 +127,13 @@ public class GiangVien {
 
     public void setLichHoc(List<LichHoc> lichHoc) {
         this.lichHoc = lichHoc;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

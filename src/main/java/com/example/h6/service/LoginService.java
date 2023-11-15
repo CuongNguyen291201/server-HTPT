@@ -70,6 +70,9 @@ public class LoginService {
         }
 
 
+        System.out.println(currentUser);
+
+
         return currentUser;
     }
 

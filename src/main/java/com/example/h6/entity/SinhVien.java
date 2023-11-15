@@ -20,6 +20,9 @@ public class SinhVien {
 
     @Column(name = "password", length = 255)
     private String password;
+
+    @Column(name = "role", length = 10)
+    private int role;
     @Column(name = "ngaySinh", length = 255)
     private String ngaySinh;
 
@@ -45,13 +48,14 @@ public class SinhVien {
 
     }
 
-    public SinhVien(Long id, String ten, String ngaySinh, String gioiTinh, String email, String password) {
+    public SinhVien(Long id, String ten, String ngaySinh, String gioiTinh, String email, String password, int role) {
         this.id = id;
         this.ten = ten;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -116,5 +120,13 @@ public class SinhVien {
 
     public void setChuyenNganh(ChuyenNganh chuyenNganh) {
         this.chuyenNganh = chuyenNganh;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
